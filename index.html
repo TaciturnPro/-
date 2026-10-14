@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>物理一轮 · 运动与匀变速</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#0f1115;color:#e6e8ec;font:16px/1.7 -apple-system,"PingFang SC",sans-serif;
+  padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:9;background:#0f1115ee;backdrop-filter:blur(8px);
+  padding:14px 16px 10px;border-bottom:1px solid #22262e}
+h1{font-size:17px;margin:0;font-weight:600}
+.sub{font-size:12px;color:#8b93a1;margin-top:2px}
+main{padding:14px 14px 20px}
+.card{background:#171a21;border:1px solid #232834;border-radius:14px;padding:14px;margin-bottom:12px}
+.ct{font-size:16px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pct{font-size:12px;color:#8b93a1;font-weight:400;white-space:nowrap}
+.body{display:none;margin-top:12px;border-top:1px solid #232834;padding-top:12px}
+.body.on{display:block}
+h4{margin:14px 0 6px;font-size:13px;color:#6fb3ff;letter-spacing:.5px}
+h4:first-child{margin-top:0}
+p{margin:6px 0}
+ul{margin:6px 0;padding-left:20px}
+li{margin:4px 0}
+.f{background:#10131a;border-left:3px solid #3d7dd8;padding:8px 10px;border-radius:0 8px 8px 0;margin:8px 0;font-size:15px}
+.bad{border-left-color:#e05a5a}.good{border-left-color:#3fae6b}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:20px;background:#232834;color:#9aa3b2;margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+td{border:1px solid #232834;padding:6px 8px;vertical-align:top}
+td:first-child{color:#ffc46b;white-space:nowrap;width:30%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+.btn{display:block;width:100%;text-align:left;background:#1d2230;border:1px solid #2b3240;
+  border-radius:12px;padding:13px 14px;margin:8px 0;font-size:15.5px;transition:.15s}
+.btn:active{transform:scale(.985)}
+.btn.c{background:#143524;border-color:#2f7a4e}
+.btn.w{background:#3a1a1a;border-color:#8a3a3a}
+.btn.dim{opacity:.45}
+.mini{display:inline-block;width:auto;padding:9px 14px;margin:5px 6px 0 0;background:#1d2230;
+  border:1px solid #2b3240;border-radius:10px;font-size:14px;text-align:center}
+.mini.on{background:#2d5bbd;border-color:#2d5bbd}
+.q{font-size:16.5px;line-height:1.65;margin-bottom:6px}
+.exp{background:#10131a;border-radius:10px;padding:11px 12px;margin-top:10px;font-size:14.5px;display:none}
+.exp.on{display:block}
+.bar{height:5px;background:#232834;border-radius:9px;overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#3d7dd8,#6fb3ff)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#141720;
+  border-top:1px solid #232834;padding-bottom:env(safe-area-inset-bottom);z-index:20}
+nav button{flex:1;padding:11px 0 10px;font-size:11px;color:#79818f;text-align:center}
+nav button.on{color:#6fb3ff}
+nav i{display:block;font-size:19px;font-style:normal;margin-bottom:2px}
+.empty{text-align:center;color:#79818f;padding:40px 16px;font-size:14.5px}
+textarea{width:100%;height:120px;background:#10131a;color:#e6e8ec;border:1px solid #2b3240;
+  border-radius:10px;padding:10px;font:13px/1.5 ui-monospace,monospace}
+.warn{background:#2a1f10;border:1px solid #6b4a1a;border-radius:10px;padding:10px 12px;font-size:14px;color:#ffc46b}
+.row{display:flex;gap:8px}.row>*{flex:1}
+.n{color:#8b93a1;font-size:13px}
+sub,sup{font-size:.72em}
+</style>
+</head>
+<body>
+<header><h1 id="ht">专题一 · 运动的描述与匀变速直线运动</h1><div class="sub" id="hs">人教版 必修一 · 一轮复习</div></header>
+<main id="app"></main>
+<nav>
+  <button data-t="learn" class="on"><i>📖</i>讲解</button>
+  <button data-t="quiz"><i>✏️</i>刷题</button>
+  <button data-t="wrong"><i>🔖</i>错题本</button>
+  <button data-t="data"><i>💾</i>备份</button>
+</nav>
+<script>
+/* ========== 考点讲解 ========== */
+const C=[
+{id:'c1',n:'1. 质点与参考系',b:`
+<h4>核心结论</h4>
+<ul><li><b>质点</b>是理想模型:忽略物体大小和形状,把质量集中于一点。</li>
+<li>能否看成质点,<b>取决于所研究的问题</b>,不取决于物体本身大不大。</li>
+<li>描述运动必须先选<b>参考系</b>;同一运动,参考系不同,描述结果不同。坐标系是建立在参考系上的量化工具。</li></ul>
+<h4>为什么</h4>
+<p>只要物体的大小、形状对所研究的问题影响可以忽略,就可以当质点。地球公转时直径相对轨道半径微不足道,可视为质点;研究自转时转动本身就是研究对象,就不能。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ 体积很小的物体一定能看成质点 —— 研究乒乓球的旋转时,它再小也不行。</div>
+<div class="f good">✓ 火车从北京开到上海用多长时间,几百米长的火车也能看成质点。</div>`},
+
+{id:'c2',n:'2. 位移与路程',b:`
+<h4>核心结论</h4>
+<ul><li><b>位移</b>:矢量,由初位置指向末位置的有向线段,只看首末,与路径无关。</li>
+<li><b>路程</b>:标量,实际轨迹的长度,与路径有关。</li>
+<li>恒有 |位移| ≤ 路程,<b>只有单向直线运动时两者大小相等</b>。</li></ul>
+<h4>为什么</h4>
+<p>位移只关心"从哪到哪",路程关心"走了多远"。一旦有拐弯或折返,走过的路就比首末连线长。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ 绕圆形跑道跑一整圈:路程 2πR,位移 0,不是 2πR。</div>
+<div class="f good">✓ 沿半径 R 圆周跑半圈:路程 πR,位移大小 2R(直径)。</div>`},
+
+{id:'c3',n:'3. 速度、平均速度与平均速率',b:`
+<h4>核心结论</h4>
+<ul><li>平均速度 v̄ = Δx/Δt,<b>矢量</b>,方向与位移同向。</li>
+<li>平均速率 = 路程/时间,<b>标量</b>,一般不等于平均速度的大小。</li>
+<li>瞬时速度:Δt→0 时的平均速度;速率 = 瞬时速度的大小。</li>
+<li>v̄ = (v<sub>0</sub>+v)/2 <b>只对匀变速直线运动成立</b>。</li></ul>
+<h4>为什么</h4>
+<p>平均速度由位移定义,折返会让位移变小而路程不变,所以两者分道扬镳。而 (v<sub>0</sub>+v)/2 这个式子来自 v-t 图像中梯形面积,只有图线是直线(匀变速)时才能这么算。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ 前一半<b>路程</b> 10 m/s、后一半路程 15 m/s,全程平均速度算成 12.5 m/s。<br>正确:v̄ = 2v<sub>1</sub>v<sub>2</sub>/(v<sub>1</sub>+v<sub>2</sub>) = 12 m/s。</div>
+<div class="f good">✓ 前一半<b>时间</b> 10 m/s、后一半时间 15 m/s,这时才是 (v<sub>1</sub>+v<sub>2</sub>)/2 = 12.5 m/s。</div>
+<p class="n">分清"一半路程"还是"一半时间",这是这个考点唯一的分水岭。</p>`},
+
+{id:'c4',n:'4. 加速度',b:`
+<h4>核心结论</h4>
+<ul><li>a = Δv/Δt,矢量,方向与<b>速度变化量 Δv</b> 同向,与 v 的方向没有必然联系。</li>
+<li>a 与 v 同向 → 加速;a 与 v 反向 → 减速。<b>只看这一条,不看正负号大小。</b></li>
+<li>a 大不代表 v 大;a 在减小,只要仍与 v 同向,速度照样<b>继续增大</b>。</li>
+<li>v = 0 时 a 可以不为零(竖直上抛最高点)。</li></ul>
+<h4>为什么</h4>
+<p>加速度刻画的是速度<b>改变的快慢</b>,不是速度本身的大小。它和速度是两个独立的量,只有方向关系决定加速还是减速。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ "加速度为正,物体一定加速" —— 若规定向右为正,物体向左运动(v&lt;0)而 a&gt;0,则是在减速。</div>
+<div class="f good">✓ 竖直上抛到最高点:v = 0,a = g = 10 m/s²,方向竖直向下。</div>`},
+
+{id:'c5',n:'5. 匀变速直线运动基本公式',b:`
+<h4>核心结论</h4>
+<div class="f">v = v<sub>0</sub> + at<br>x = v<sub>0</sub>t + ½at²<br>v² = v<sub>0</sub>² + 2ax<br>x = (v<sub>0</sub>+v)t/2</div>
+<ul><li>四个式子里一共五个量,<b>知三求二</b>。</li>
+<li>都是矢量式:先规定正方向(通常取 v<sub>0</sub> 方向为正),再带正负号代入。</li>
+<li>不含 t 的 v² = v<sub>0</sub>² + 2ax 在"不问时间"的题里最省步骤。</li></ul>
+<h4>为什么</h4>
+<p>前两式是定义式直接积分的结果,后两式由前两式消去 t 或 a 得到,不是新规律。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ 汽车 20 m/s 刹车,a = 5 m/s²,求 6 s 内位移,直接代 x = 20×6 − ½×5×36 = 30 m。<br>错在车在 t = 4 s 就停了,不会倒着开回来。</div>
+<div class="f good">✓ 先算刹车时间 t<sub>0</sub> = v<sub>0</sub>/a = 4 s &lt; 6 s,所以 x = v<sub>0</sub>²/2a = 40 m。</div>
+<p class="n">看到"刹车""制动""滑行",第一反应就是算停止时间,再和题给时间比。</p>`},
+
+{id:'c6',n:'6. 重要推论与比例关系',b:`
+<h4>核心结论</h4>
+<ul><li>中间<b>时刻</b>速度:v<sub>t/2</sub> = (v<sub>0</sub>+v)/2 = x/t</li>
+<li>中间<b>位置</b>速度:v<sub>x/2</sub> = √[(v<sub>0</sub>²+v²)/2]</li>
+<li>恒有 <b>v<sub>x/2</sub> &gt; v<sub>t/2</sub></b>(匀变速直线运动中,只要 a≠0)</li>
+<li>连续相等时间 T 内位移差:<b>Δx = aT²</b>,推广 x<sub>m</sub> − x<sub>n</sub> = (m−n)aT²</li>
+<li>逐差法(实验求 a):a = (x<sub>4</sub>+x<sub>5</sub>+x<sub>6</sub> − x<sub>1</sub>−x<sub>2</sub>−x<sub>3</sub>)/(9T²)</li></ul>
+<h4>初速度为零的匀加速(重要比例)</h4>
+<table>
+<tr><td>各秒末速度</td><td>1 : 2 : 3 : …</td></tr>
+<tr><td>前 1s、前 2s… 总位移</td><td>1 : 4 : 9 : …</td></tr>
+<tr><td>第 1s、第 2s… 内位移</td><td>1 : 3 : 5 : …</td></tr>
+<tr><td>通过连续相等位移所用时间</td><td>1 : (√2−1) : (√3−√2) : …</td></tr>
+</table>
+<h4>易错对比</h4>
+<div class="f bad">✗ 把"前 n 秒位移比 1:4:9"和"第 n 秒内位移比 1:3:5"混用。</div>
+<div class="f good">✓ "前"是累计总位移,"第"是那一秒单独走的。1+3 = 4,1+3+5 = 9,两套比例本身是自洽的。</div>`},
+
+{id:'c7',n:'7. 自由落体与竖直上抛',b:`
+<h4>核心结论</h4>
+<ul><li><b>自由落体</b>:v<sub>0</sub> = 0,a = g。v = gt,h = ½gt²,v² = 2gh。</li>
+<li><b>竖直上抛</b>:全程只受重力,是<b>一个完整的匀变速直线运动</b>,可以整体处理。</li>
+<li>取向上为正则 a = −g:上升时间 = 下落回抛点时间 = v<sub>0</sub>/g;最大高度 H = v<sub>0</sub>²/2g;回到抛点时速率仍为 v<sub>0</sub>,方向相反。</li></ul>
+<h4>为什么</h4>
+<p>上升段和下降段加速度始终是 g,没有突变,所以不必分段。分段只是为了直观,整体法更快且不易错。</p>
+<h4>易错对比</h4>
+<div class="f bad">✗ 认为最高点加速度为零,或认为上升和下降要用两套公式算。</div>
+<div class="f good">✓ v<sub>0</sub> = 20 m/s 上抛(g = 10):整体法 0 = 20t − ½×10t² 得 t = 4 s,就是全程时间。</div>`},
+
+{id:'c8',n:'8. 运动图像 x-t 与 v-t',b:`
+<h4>核心结论</h4>
+<table>
+<tr><td>x-t 斜率</td><td>速度(含正负,表示方向)</td></tr>
+<tr><td>x-t 交点</td><td>两物体相遇</td></tr>
+<tr><td>v-t 斜率</td><td>加速度</td></tr>
+<tr><td>v-t 面积</td><td>位移(时间轴下方记负)</td></tr>
+<tr><td>v-t 与 t 轴交点</td><td>速度反向的时刻</td></tr>
+</table>
+<h4>最容易丢分的一条</h4>
+<div class="f bad">✗ 把图线形状当成运动轨迹。x-t 图里一条倾斜直线表示<b>匀速直线运动</b>,不是物体斜着走。</div>
+<div class="f good">✓ 这两种图都只能描述<b>直线运动</b>,纵轴是位置或速度,不是空间位置的二维坐标。</div>
+<p class="n">求位移用 v-t 面积并带正负号;求路程才把负面积取绝对值相加。</p>`},
+
+{id:'c9',n:'9. 关键词陷阱对照表',b:`
+<p class="n">一轮复习丢基础分,很大一部分不是不会算,是没看见题目悄悄给的条件。</p>
+<table>
+<tr><td>刹车 / 制动 / 滑行</td><td>减速到零后不再反向,必须先算停止时间</td></tr>
+<tr><td>恰好 / 刚好</td><td>临界条件,往往某个量正好为 0</td></tr>
+<tr><td>从静止开始</td><td>v<sub>0</sub> = 0</td></tr>
+<tr><td>自由下落 / 自由释放</td><td>v<sub>0</sub> = 0 且 a = g</td></tr>
+<tr><td>竖直下抛</td><td>v<sub>0</sub> ≠ 0,方向向下,a = g</td></tr>
+<tr><td>匀减速直到停止</td><td>运动时间 = v<sub>0</sub>/a,之后保持静止</td></tr>
+<tr><td>位移为零</td><td>回到出发点,不是没动</td></tr>
+<tr><td>第 n 秒内</td><td>时长 1 s 的那一段,不是前 n 秒</td></tr>
+<tr><td>平均速度</td><td>必须除以总时间,不是速度的算术平均</td></tr>
+</table>`}
+];
+
+/* ========== 题库 ========== */
+const Q=[
+{id:'q1',c:'c1',t:'下列关于质点的说法,正确的是:',o:['体积很小的物体一定可以看成质点','研究地球自转时可以把地球看成质点','研究火车从北京到上海所需时间时可把火车看成质点','质点是一种实际存在的很小的物体'],a:2,g:'概念',e:'能否看成质点取决于所研究的问题。研究自转时转动本身是研究对象,不能视为质点;算全程时间时,火车长度相对路程可忽略,可以。质点是理想模型,不真实存在。'},
+{id:'q2',c:'c2',t:'物体做单向直线运动时,位移的大小与路程的关系是:',o:['一定相等','位移一定大于路程','位移一定小于路程','无法确定'],a:0,g:'概念',e:'只有单向(不折返)直线运动,轨迹长度才等于首末连线长度。一旦折返或转弯,路程就大于位移大小。'},
+{id:'q3',c:'c2',t:'某人沿半径为 R 的圆形跑道从一点出发跑了半圈,他的位移大小和路程分别是:',o:['2R 和 πR','πR 和 2R','2R 和 2πR','0 和 πR'],a:0,g:'计算',e:'半圈的首末位置是直径两端,位移大小 = 2R;路程 = 半个周长 = πR。注意别把两者写反。'},
+{id:'q4',c:'c3',t:'汽车沿直线行驶,前一半路程速度为 10 m/s,后一半路程速度为 15 m/s,全程平均速度为:',o:['12.5 m/s','12 m/s','13 m/s','11 m/s'],a:1,g:'公式',e:'设总路程 2s。t = s/10 + s/15 = s/6,v̄ = 2s ÷ (s/6) = 12 m/s。等路程时 v̄ = 2v₁v₂/(v₁+v₂),只有等时间才用 (v₁+v₂)/2 = 12.5。'},
+{id:'q5',c:'c3',t:'公式 v̄ = (v₀+v)/2 适用于:',o:['任何形式的运动','任何直线运动','匀变速直线运动','只有匀速直线运动'],a:2,g:'条件',e:'该式由 v-t 图线为直线(斜率恒定)推出,因此只适用于匀变速直线运动。匀速运动是其中 a=0 的特例,但选项 D 范围太窄。'},
+{id:'q6',c:'c4',t:'关于加速度,下列说法正确的是:',o:['加速度大,速度一定大','加速度为正值,物体一定在加速','加速度的方向与速度变化量的方向相同','速度为零时加速度一定为零'],a:2,g:'概念',e:'a = Δv/Δt,方向与 Δv 同向,这是定义。加速还是减速只看 a 与 v 是否同向,与正负号无关;最高点 v=0 而 a=g 说明 D 错。'},
+{id:'q7',c:'c4',t:'物体做直线运动,加速度逐渐减小但方向始终与速度方向相同,则物体的速度:',o:['逐渐减小','逐渐增大','保持不变','先增大后减小'],a:1,g:'概念',e:'只要 a 与 v 同向,速度就在增大,只是增大得越来越慢。直到 a=0 时速度达到最大并保持不变。'},
+{id:'q8',c:'c4',t:'竖直上抛的物体到达最高点时:',o:['速度为零,加速度也为零','速度为零,加速度为 g,方向竖直向下','速度为零,加速度为 g,方向竖直向上','速度不为零'],a:1,g:'概念',e:'最高点只是速度为零的瞬间,物体仍只受重力,a=g 始终竖直向下。若 a=0 物体就会停在空中。'},
+{id:'q9',c:'c5',t:'物体初速度 2 m/s,沿初速度方向做匀加速运动,a = 2 m/s²,则 4 s 末的速度为:',o:['8 m/s','10 m/s','6 m/s','12 m/s'],a:1,g:'计算',e:'v = v₀ + at = 2 + 2×4 = 10 m/s。'},
+{id:'q10',c:'c5',t:'汽车以 20 m/s 行驶,刹车后加速度大小为 5 m/s²,则刹车后 6 s 内汽车的位移为:',o:['60 m','40 m','30 m','120 m'],a:1,g:'条件',e:'刹车陷阱题。停止时间 t₀ = 20/5 = 4 s < 6 s,所以实际只运动 4 s:x = v₀²/2a = 400/10 = 40 m。若硬代 6 s 会得 30 m,等于让车倒开。'},
+{id:'q11',c:'c6',t:'物体由静止开始做匀加速直线运动,第 1 s 内、第 2 s 内、第 3 s 内的位移之比为:',o:['1 : 2 : 3','1 : 3 : 5','1 : 4 : 9','1 : √2 : √3'],a:1,g:'公式',e:'"第 n 秒内"的位移比是 1:3:5:…;1:4:9 是"前 n 秒"的总位移比;1:2:3 是各秒末速度比。三者别混。'},
+{id:'q12',c:'c6',t:'判断:初速度为零的匀加速直线运动,前 1 s、前 2 s、前 3 s 内的位移之比为 1 : 4 : 9。',o:['正确','错误'],a:0,g:'公式',e:'正确。x = ½at²,位移与 t² 成正比,所以 1²:2²:3² = 1:4:9。'},
+{id:'q13',c:'c6',t:'匀变速直线运动中,任意两个连续相等时间 T 内的位移之差等于:',o:['aT','aT²','2aT²','不确定'],a:1,g:'公式',e:'Δx = aT²,这是判断匀变速运动和实验中求加速度的核心关系式。相隔 m−n 段时则为 (m−n)aT²。'},
+{id:'q14',c:'c6',t:'某物体做匀变速直线运动,在连续相等的时间间隔 T = 1 s 内的位移依次为 2 m 和 4 m,则加速度为:',o:['1 m/s²','2 m/s²','4 m/s²','0.5 m/s²'],a:1,g:'计算',e:'由 Δx = aT²:a = (4−2)/1² = 2 m/s²。'},
+{id:'q15',c:'c6',t:'匀变速直线运动中(a≠0),中间时刻的瞬时速度 v(t/2) 与中间位置的瞬时速度 v(x/2) 的大小关系是:',o:['v(t/2) > v(x/2)','两者相等','v(x/2) > v(t/2)','无法确定'],a:2,g:'概念',e:'v(t/2) = (v₀+v)/2 是算术平均,v(x/2) = √[(v₀²+v²)/2] 是方均根,后者恒大于前者(v₀≠v 时)。记住"位置的大于时刻的",无论加速减速都成立。'},
+{id:'q16',c:'c7',t:'物体自由下落,g 取 10 m/s²,则 2 s 末的速度为:',o:['10 m/s','20 m/s','5 m/s','40 m/s'],a:1,g:'计算',e:'v = gt = 10×2 = 20 m/s。'},
+{id:'q17',c:'c7',t:'物体自由下落 45 m 所需时间为(g 取 10 m/s²):',o:['2 s','3 s','4.5 s','9 s'],a:1,g:'计算',e:'h = ½gt²:45 = 5t²,t = 3 s。'},
+{id:'q18',c:'c7',t:'以 20 m/s 的速度竖直上抛一物体,不计空气阻力,g 取 10 m/s²,从抛出到落回抛出点的总时间为:',o:['2 s','4 s','6 s','1 s'],a:1,g:'公式',e:'上升时间 = v₀/g = 2 s,下落时间相同,总共 4 s。整体法:取向上为正,0 = 20t − 5t²,t = 4 s。'},
+{id:'q19',c:'c8',t:'在 x-t 图像中,一条倾斜的直线表示物体做:',o:['匀加速直线运动','匀速直线运动','静止','曲线运动'],a:1,g:'概念',e:'x-t 图斜率即速度,直线说明速度恒定,为匀速直线运动。图线倾斜不代表物体斜着走。'},
+{id:'q20',c:'c8',t:'v-t 图像中图线与时间轴所围的面积表示:',o:['速度的变化量','加速度','位移','总路程'],a:2,g:'概念',e:'面积表示位移,且时间轴下方的面积记为负。求路程才需把各段面积取绝对值后相加。'},
+{id:'q21',c:'c8',t:'判断:x-t 图像中图线的形状就是物体运动的轨迹。',o:['正确','错误'],a:1,g:'概念',e:'错误。x-t 和 v-t 图像都只能描述直线运动,纵轴是位置或速度,不是第二个空间方向,图线形状与轨迹无关。'},
+{id:'q22',c:'c5',t:'物体做匀减速直线运动,初速度 10 m/s,加速度大小 2 m/s²,则 3 s 内的位移为:',o:['21 m','30 m','24 m','15 m'],a:0,g:'计算',e:'停止时间 t₀ = 10/2 = 5 s > 3 s,公式可直接用:x = 10×3 − ½×2×3² = 30 − 9 = 21 m。'},
+{id:'q23',c:'c4',t:'判断:加速度是矢量,它的方向可能与速度方向相反。',o:['正确','错误'],a:0,g:'概念',e:'正确。a 与 v 反向时物体做减速运动,例如刹车、竖直上抛的上升阶段。'},
+{id:'q24',c:'c6',t:'汽车由静止开始做匀加速直线运动,第 3 s 内的位移为 5 m,则加速度为:',o:['1 m/s²','2 m/s²','2.5 m/s²','5 m/s²'],a:1,g:'公式',e:'第 3 s 内位移 = ½a(3²−2²) = 2.5a = 5,得 a = 2 m/s²。若误当成前 3 s 位移会算出 10/9,注意"第"与"前"的区别。'}
+];
+const REASONS=['概念','公式','条件','计算'];
+const RLABEL={概念:'概念记错',公式:'公式用错',条件:'条件漏看',计算:'计算失误'};
+
+/* ========== 数据层 ========== */
+const KEY='wlfx_zt1_v1';
+let DB=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{q:{}}}catch(e){return{q:{}}}})();
+if(!DB.q)DB.q={};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){alert('存储失败,可能是存储空间已满')}};
+const rec=id=>DB.q[id]||(DB.q[id]={att:0,cor:0,streak:0,wrong:false,reason:'',due:0});
+const DAY=864e5;
+const cStat=cid=>{const qs=Q.filter(q=>q.c===cid);let a=0,c=0;qs.forEach(q=>{const r=DB.q[q.id];if(r){a+=r.att;c+=r.cor}});return{a,c,n:qs.length,done:qs.filter(q=>DB.q[q.id]&&DB.q[q.id].att).length}};
+const wrongList=()=>Q.filter(q=>DB.q[q.id]&&DB.q[q.id].wrong);
+const dueList=()=>wrongList().filter(q=>DB.q[q.id].due<=Date.now());
+
+/* ========== 视图 ========== */
+let tab='learn',app=document.getElementById('app');
+let queue=[],qi=0,mode='all',modeC='',answered=false;
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  tab=b.dataset.t;
+  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+  window.scrollTo(0,0);render();
+});
+
+function render(){({learn,quiz,wrong,data}[tab])()}
+
+/* --- 讲解 --- */
+function learn(){
+  app.innerHTML=C.map(c=>{
+    const s=cStat(c.id),p=s.a?Math.round(s.c/s.a*100):-1;
+    return `<div class="card"><button class="ct" style="width:100%" onclick="tg('${c.id}')">
+      <span>${c.n}</span>
+      <span class="pct">${p<0?(s.n?'未练':'仅讲解'):'掌握 '+p+'%'} ›</span></button>
+      <div class="body" id="b_${c.id}">${c.b}
+      ${s.n?`<button class="mini on" style="margin-top:14px" onclick="startC('${c.id}')">练这个考点(${s.n} 题)</button>`:''}
+      </div></div>`}).join('')
+    +`<div class="card"><div class="n">共 ${C.length} 个考点 · ${Q.length} 道基础题。讲解看完点"练这个考点"立刻自测,别积累"看懂了"的错觉。</div></div>`;
+}
+window.tg=id=>document.getElementById('b_'+id).classList.toggle('on');
+window.startC=cid=>{mode='c';modeC=cid;build();tab='quiz';
+  document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.t==='quiz'));
+  window.scrollTo(0,0);render()};
+
+/* --- 刷题 --- */
+function build(){
+  let list = mode==='all'?Q.slice() : mode==='c'?Q.filter(q=>q.c===modeC) : mode==='w'?wrongList() : dueList();
+  for(let i=list.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[list[i],list[j]]=[list[j],list[i]]}
+  queue=list;qi=0;answered=false;
+}
+function quiz(){
+  if(!queue.length)build();
+  const bar=`<div class="card"><div>
+    ${[['all','全部'],['c','按考点'],['w','只刷错题'],['due','今日复习']].map(([m,n])=>
+      `<button class="mini ${mode===m?'on':''}" onclick="setMode('${m}')">${n}${m==='w'?'('+wrongList().length+')':m==='due'?'('+dueList().length+')':''}</button>`).join('')}
+    </div>${mode==='c'?`<div style="margin-top:8px">${C.filter(c=>Q.some(q=>q.c===c.id)).map(c=>
+      `<button class="mini ${modeC===c.id?'on':''}" onclick="setC('${c.id}')">${c.n.split('. ')[1]}</button>`).join('')}</div>`:''}
+    </div>`;
+  if(!queue.length){app.innerHTML=bar+`<div class="empty">${mode==='w'?'错题本是空的,先去刷题。':mode==='due'?'今天没有到期需要复习的错题。':'没有题目。'}</div>`;return}
+  const q=queue[qi],r=rec(q.id);
+  app.innerHTML=bar+`<div class="card">
+    <div class="n">第 ${qi+1} / ${queue.length} 题 &nbsp;<span class="tag">${C.find(c=>c.id===q.c).n.split('. ')[1]}</span>${r.wrong?'<span class="tag" style="color:#ff9b9b">错题</span>':''}</div>
+    <div class="bar"><i style="width:${(qi)/queue.length*100}%"></i></div>
+    <div class="q" style="margin-top:12px">${q.t}</div>
+    <div id="opts">${q.o.map((o,i)=>`<button class="btn" onclick="ans(${i})">${'ABCD'[i]}. ${o}</button>`).join('')}</div>
+    <div class="exp" id="exp"></div>
+    <div id="nx"></div></div>`;
+  answered=false;
+}
+window.setMode=m=>{mode=m;if(m==='c'&&!modeC)modeC=C[0].id;build();render()};
+window.setC=c=>{modeC=c;build();render()};
+window.ans=i=>{
+  if(answered)return;answered=true;
+  const q=queue[qi],r=rec(q.id),ok=i===q.a;
+  r.att++;
+  document.querySelectorAll('#opts .btn').forEach((b,k)=>{
+    if(k===q.a)b.classList.add('c');else if(k===i)b.classList.add('w');else b.classList.add('dim')});
+  let extra='';
+  if(ok){
+    r.cor++;r.streak++;
+    if(r.wrong){ if(r.streak>=2){r.wrong=false;r.reason='';extra='<div class="f good" style="margin-top:10px">连续答对 2 次,已移出错题本。</div>'}
+      else{r.due=Date.now()+3*DAY;extra='<div class="f" style="margin-top:10px">答对 1 次,再对 1 次就移出错题本。</div>'} }
+  }else{
+    r.streak=0;r.wrong=true;r.due=Date.now()+DAY;if(!r.reason)r.reason=q.g;
+    extra=`<div style="margin-top:10px"><div class="n">这题错在哪?点一下归类(已默认 ${RLABEL[q.g]})</div>
+      ${REASONS.map(x=>`<button class="mini ${r.reason===x?'on':''}" onclick="setR('${q.id}','${x}',this)">${RLABEL[x]}</button>`).join('')}</div>`;
+  }
+  save();
+  const e=document.getElementById('exp');
+  e.className='exp on';
+  e.innerHTML=`<b style="color:${ok?'#6fe0a0':'#ff9b9b'}">${ok?'正确':'错误'}</b> · 正确答案 ${'ABCD'[q.a]}<br>${q.e}${extra}`;
+  document.getElementById('nx').innerHTML=`<button class="btn" style="text-align:center;background:#2d5bbd;border-color:#2d5bbd;margin-top:12px" onclick="next()">${qi+1<queue.length?'下一题':'完成本轮'}</button>`;
+};
+window.setR=(id,x,el)=>{rec(id).reason=x;save();
+  el.parentNode.querySelectorAll('.mini').forEach(b=>b.classList.toggle('on',b===el))};
+window.next=()=>{ if(qi+1<queue.length){qi++;render();window.scrollTo(0,0)}
+  else{ const n=queue.length; app.innerHTML=`<div class="card"><div class="ct">本轮完成</div>
+    <p class="n" style="margin-top:10px">共 ${n} 题。错题已自动进入错题本,明天会出现在"今日复习"里。</p>
+    <button class="btn" style="text-align:center;background:#2d5bbd;border-color:#2d5bbd" onclick="build();render()">再来一轮</button></div>`}};
+
+/* --- 错题本 --- */
+let wf='all';
+function wrong(){
+  const all=wrongList();
+  const list=wf==='all'?all:all.filter(q=>DB.q[q.id].reason===wf);
+  const cnt={};REASONS.forEach(x=>cnt[x]=all.filter(q=>DB.q[q.id].reason===x).length);
+  const tot=all.length||1;
+  app.innerHTML=`<div class="card"><div class="ct">错题 ${all.length} 道<span class="pct">今日待复习 ${dueList().length}</span></div>
+    ${all.length?`<div style="margin-top:10px">${REASONS.map(x=>
+      `<div style="margin:6px 0"><div class="n">${RLABEL[x]} · ${cnt[x]} 道 (${Math.round(cnt[x]/tot*100)}%)</div>
+      <div class="bar"><i style="width:${cnt[x]/tot*100}%"></i></div></div>`).join('')}
+      <div class="n" style="margin-top:10px">占比最高的那一类,就是你丢基础分的真正原因。</div></div>`:''}
+    <div style="margin-top:10px">${[['all','全部']].concat(REASONS.map(x=>[x,RLABEL[x]])).map(([v,n])=>
+      `<button class="mini ${wf===v?'on':''}" onclick="setWF('${v}')">${n}</button>`).join('')}</div></div>`
+   +(list.length?list.map(q=>{const r=DB.q[q.id];const d=Math.ceil((r.due-Date.now())/DAY);
+      return `<div class="card"><div class="n"><span class="tag">${RLABEL[r.reason]||'未分类'}</span>
+        <span class="tag">${C.find(c=>c.id===q.c).n.split('. ')[1]}</span>错 ${r.att-r.cor} 次 · ${r.due<=Date.now()?'待复习':d+' 天后复习'}</div>
+        <div class="q" style="margin-top:8px">${q.t}</div>
+        <div class="f good">正确答案 ${'ABCD'[q.a]}. ${q.o[q.a]}</div>
+        <div style="font-size:14.5px;color:#aeb6c2">${q.e}</div>
+        <button class="mini" onclick="rm('${q.id}')">手动移出</button></div>`}).join('')
+     :`<div class="empty">${all.length?'这一类里没有错题。':'还没有错题。答错的题会自动收进来,按错误原因分类统计。'}</div>`);
+}
+window.setWF=v=>{wf=v;render()};
+window.rm=id=>{rec(id).wrong=false;save();render()};
+
+/* --- 备份 --- */
+function data(){
+  const n=Object.keys(DB.q).length,w=wrongList().length;
+  app.innerHTML=`<div class="card warn">iPhone 上两件事务必记住:<br>
+    1. 先用 Safari 分享菜单"添加到主屏幕",之后<b>只从主屏幕图标进入</b>。Safari 里和图标里的数据是两套,分开存。<br>
+    2. Safari 大约 7 天不访问会清理网站数据。每周导出一次存到"文件"App,就不会丢。</div>
+  <div class="card"><div class="ct">当前数据</div>
+    <p class="n">已练过 ${n} 题 · 错题 ${w} 道</p>
+    <button class="btn" style="text-align:center" onclick="exp()">导出备份(下载 JSON)</button>
+    <button class="btn" style="text-align:center" onclick="cp()">复制备份内容到剪贴板</button></div>
+  <div class="card"><div class="ct">导入</div>
+    <p class="n">把之前导出的内容粘进来,会覆盖当前数据。</p>
+    <textarea id="imp" placeholder="在此粘贴备份 JSON"></textarea>
+    <button class="btn" style="text-align:center" onclick="imp()">导入并覆盖</button></div>
+  <div class="card"><div class="ct">清空</div>
+    <button class="btn" style="text-align:center;color:#ff9b9b" onclick="clr()">清空全部练习与错题记录</button></div>`;
+}
+window.exp=()=>{const b=new Blob([JSON.stringify(DB)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='物理专题一备份_'+new Date().toISOString().slice(0,10)+'.json';a.click()};
+window.cp=()=>{const t=JSON.stringify(DB);
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject())
+   .then(()=>alert('已复制,粘贴到备忘录或微信收藏即可'))
+   .catch(()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);
+     a.select();document.execCommand('copy');a.remove();alert('已复制')})};
+window.imp=()=>{const v=document.getElementById('imp').value.trim();if(!v)return;
+  try{const o=JSON.parse(v);if(!o.q)throw 0;DB=o;save();alert('导入成功');render()}catch(e){alert('格式不对,请检查粘贴内容是否完整')}};
+window.clr=()=>{if(confirm('确定清空?此操作不可恢复,建议先导出备份。')){DB={q:{}};save();render()}};
+
+render();
+</script>
+</body>
+</html>
