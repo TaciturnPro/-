@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>物理一轮 · 概念精度训练</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header><h1>物理一轮 · 概念精度训练</h1><div class="sub">云南师大附中 2027 届 · 选择题专项</div></header>
+<main id="app"></main>
+<nav>
+ <button data-t="home" class="on"><i>🏠</i>首页</button>
+ <button data-t="wrong"><i>🔖</i>错题本</button>
+ <button data-t="ref"><i>📐</i>速查</button>
+ <button data-t="data"><i>💾</i>备份</button>
+</nav>
+<script src="app.js"></script>
+<script>
+const box=document.getElementById('app');let t='home';
+const M={home:homeRender,wrong:wrongRender,ref:refRender,data:dataRender};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ t=b.dataset.t;
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ window.scrollTo(0,0);M[t](box)});
+M.home(box);
+</script>
+</body>
+</html>
