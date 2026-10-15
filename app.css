@@ -3,7 +3,7 @@ body{margin:0;background:#0f1115;color:#e6e8ec;font:16px/1.7 -apple-system,"Ping
 header{position:sticky;top:0;z-index:9;background:#0f1115ee;backdrop-filter:blur(8px);padding:14px 16px 10px;border-bottom:1px solid #22262e}
 h1{font-size:17px;margin:0;font-weight:600}
 .sub{font-size:12px;color:#8b93a1;margin-top:2px}
-main{padding:14px 14px 20px}
+main{padding:14px 14px 8px}
 .card{background:#171a21;border:1px solid #232834;border-radius:14px;padding:14px;margin-bottom:12px}
 .ct{font-size:16px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left}
 .pct{font-size:12px;color:#8b93a1;font-weight:400;white-space:nowrap}
