@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>物理一轮 · 概念精度</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0b0d12;--c1:#151922;--c2:#1b2130;--ln:#252b38;--t1:#e8eaf0;--t2:#99a1b3;--t3:#6b7383;--ac:#5b8def;--ac2:#7aa5ff}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font:16px/1.7 -apple-system,"PingFang SC",sans-serif;padding-bottom:72px;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+header{padding:20px 18px 14px;background:linear-gradient(180deg,#141a26,var(--bg))}
+h1{margin:0;font-size:19px;font-weight:700;letter-spacing:-.3px}
+.sub{font-size:12.5px;color:var(--t3);margin-top:3px}
+main{padding:0 14px 20px}
+.card{background:var(--c1);border:1px solid var(--ln);border-radius:16px;padding:16px;margin-bottom:12px}
+.ct{font-size:16.5px;font-weight:650;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left}
+.pct{font-size:12px;color:var(--t3);font-weight:400;white-space:nowrap}
+.bd{display:none;margin-top:14px;border-top:1px solid var(--ln);padding-top:14px}
+.bd.on{display:block}
+h4{margin:16px 0 6px;font-size:12px;color:var(--ac2);letter-spacing:1px}
+h4:first-child{margin-top:0}
+p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:5px 0}
+a{color:inherit;text-decoration:none}
+.n{color:var(--t2);font-size:13.5px}
+sub,sup{font-size:.7em}
+.f{background:#10141c;border-left:3px solid var(--ac);padding:10px 12px;border-radius:0 10px 10px 0;margin:10px 0;font-size:14.5px}
+.good{border-left-color:#3fae6b}.bad{border-left-color:#e0565f}
+.warn{background:#231a0d;border:1px solid #5c4318;border-radius:12px;padding:12px 14px;font-size:14px;color:#f0c478}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;background:#232a38;color:var(--t2);margin-right:5px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0;border:1px solid var(--ln);border-radius:10px;overflow:hidden}
+td{border-bottom:1px solid var(--ln);padding:9px 11px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{color:#f0bf72;white-space:nowrap;width:33%;background:#11151d}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+.btn{display:block;width:100%;text-align:left;background:var(--c2);border:1px solid var(--ln);border-radius:13px;padding:14px 15px;margin:9px 0;font-size:15.5px;line-height:1.5;transition:.14s}
+.btn:active{transform:scale(.985)}
+.btn.sel{background:#1e2d4d;border-color:var(--ac)}
+.btn.c{background:#13311f;border-color:#2f7a4e}
+.btn.w{background:#331518;border-color:#8a3a40}
+.btn.dim{opacity:.38}
+.btn.mid{text-align:center}
+.btn.go{text-align:center;background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.mini{display:inline-block;width:auto;padding:9px 15px;margin:5px 6px 0 0;background:var(--c2);border:1px solid var(--ln);border-radius:11px;font-size:14px;text-align:center}
+.mini.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.entry{display:block;background:linear-gradient(135deg,var(--c2),var(--c1));border:1px solid var(--ln);border-radius:16px;padding:17px;margin-bottom:11px}
+.entry:active{transform:scale(.985)}
+.en{font-size:16.5px;font-weight:650}
+.ed{font-size:13px;color:var(--t2);margin-top:5px}
+.soon{opacity:.4}
+.q{font-size:17px;line-height:1.7;margin:12px 0 4px}
+.exp{background:#10141c;border:1px solid var(--ln);border-radius:13px;padding:13px 14px;margin-top:12px;font-size:14.5px;display:none}
+.exp.on{display:block}
+.opt{margin:7px 0;font-size:14.5px}
+.opt b{color:#f0bf72}
+.bar{height:6px;background:#1e2430;border-radius:9px;overflow:hidden;margin-top:9px}
+.bar>i{display:block;height:100%;background:var(--ac)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#11151e;border-top:1px solid var(--ln);z-index:20}
+nav button{flex:1;padding:10px 0 9px;font-size:10.5px;color:var(--t3);text-align:center}
+nav button.on{color:var(--ac2)}
+nav i{display:block;font-size:20px;font-style:normal;margin-bottom:3px}
+.empty{text-align:center;color:var(--t3);padding:48px 20px;font-size:14.5px}
+textarea{width:100%;height:110px;background:#10141c;color:var(--t1);border:1px solid var(--ln);border-radius:12px;padding:12px;font:13px/1.6 ui-monospace,monospace}
+</style>
+</head>
+<body>
+<header><h1 id="hT">物理一轮 · 概念精度</h1><div class="sub" id="hS">云南师大附中 2027 届 · 选择题专项</div></header>
+<main id="app"></main>
+<nav>
+<button data-t="home" class="on"><i>🏠</i>首页</button>
+<button data-t="learn"><i>📖</i>讲解</button>
+<button data-t="quiz"><i>✏️</i>刷题</button>
+<button data-t="wrong"><i>🔖</i>错题本</button>
+<button data-t="more"><i>📐</i>更多</button>
+</nav>
+<script>
+const G=[
+{id:'g1',s:'常驻错项',n:'1. 常驻错项:惯性、牛三、质点、向心力',b:`
+<h4>核心四条</h4>
+<ul><li><b>惯性只由质量决定</b>,与速度、受力、运动状态全无关。</li>
+<li><b>牛顿第三定律任何情况都成立</b>:等大、反向、同性质,作用在两个物体上,所以永远不能相加求合力。加速、碰撞、静止一律成立。</li>
+<li><b>质点取决于所研究的问题</b>。研究转动时,物体再小也不能当质点。</li>
+<li><b>向心力按效果命名</b>,是已有力的合力或分力,受力分析时不再单独画。<b>不存在离心力。</b></li></ul>
+<h4>易错</h4>
+<div class="f bad">✗ 球触网速度减小所以惯性变小 —— 质量没变,惯性不变。</div>
+<div class="f bad">✗ 球对网的力大于网对球的力 —— 永远等大。网变形是因为网自身受力,与大小关系无关。</div>
+<div class="f good">✓ 鸡蛋碰石头受力等大,鸡蛋碎是承受能力差,不是受力更大。</div>`},
+{id:'g2',s:'矢量性',n:'2. 矢量性:"相同"与"相等"',b:`
+<h4>一句话定生死</h4>
+<div class="f"><b>"相同"=大小和方向都一样;"相等"只比大小。</b>位移、速度、Δv、动量、冲量都是矢量,题干写"相同"就必须两样都查。</div>
+<h4>两个必背对照</h4>
+<ul><li><b>平抛</b>:Δv=gΔt,相等时间内大小相等、方向都竖直向下 → <b>Δv 一定相同</b>。</li>
+<li><b>匀速圆周</b>:相等时间内 Δv 大小相等,方向时刻在变 → <b>Δv 不一定相同</b>。</li></ul>
+<p class="n">出题人常把这两条对调,看到就要条件反射。</p>
+<h4>延伸</h4>
+<ul><li>匀速圆周:速度在变、速率不变、动能不变、动量在变。</li>
+<li>合外力冲量 = 动量变化量,方向一致。</li></ul>
+<div class="f bad">✗ 速率不变就是速度不变 —— 匀速圆周正是反例。</div>`},
+{id:'g3',s:'运动图像',n:'3. 运动图像:x-t 与 v-t',b:`
+<h4>读图只认四样</h4>
+<table><tr><td>x-t 斜率</td><td>速度(含正负表方向)</td></tr>
+<tr><td>x-t 交点</td><td>两物体相遇</td></tr>
+<tr><td>v-t 斜率</td><td>加速度</td></tr>
+<tr><td>v-t 面积</td><td>位移(轴下方记负)</td></tr></table>
+<h4>最容易丢的两条</h4>
+<div class="f bad">✗ 把图线形状当轨迹。x-t 图里倾斜直线表示<b>匀速直线运动</b>。两种图都只描述直线运动。</div>
+<div class="f bad">✗ v-t 图两图线交点表示相遇 —— 交点只表示<b>速度相等</b>。相遇要看面积是否相等。</div>
+<h4>关键推论</h4>
+<p>同时同地出发的两物体,<b>速度相等时距离最大或最小</b>;相遇时刻是两图线面积相等的时刻。</p>`},
+{id:'g4',s:'动态平衡',n:'4. 动态平衡:"缓慢"与动态三角形',b:`
+<h4>三个关键词</h4>
+<ul><li><b>缓慢</b>:每一时刻都是平衡态,按静力学处理。</li>
+<li><b>绳绕过光滑定滑轮</b>:两段绳张力大小相等,这是入口。</li>
+<li><b>轻绳、轻杆、光滑</b>:各给一个条件,漏一个方程就废。</li></ul>
+<h4>动态三角形</h4>
+<p>三力平衡且其中一个大小方向都不变(重力)、一个方向不变(垂直斜面的支持力)、一个方向在变(绳张力)时,把三力首尾相接成封闭三角形,转动变化的那条边,各力变化趋势一眼可见。</p>
+<div class="f good">✓ 重物沿固定斜面被绳缓慢下放,绳绕过定滑轮:张力与支持力都单调变小,不是"先减小后增大"。</div>
+<h4>整体法与隔离法</h4>
+<ul><li>求<b>外力</b>或系统加速度 → 整体法,内力不画入受力图。</li>
+<li>求系统<b>内部</b>相互作用力 → 隔离法。</li></ul>`},
+{id:'g5',s:'曲线圆周',n:'5. 曲线运动与圆周临界',b:`
+<h4>曲线运动条件</h4>
+<ul><li>合力与速度<b>不共线</b>即做曲线运动,合力指向轨迹<b>凹侧</b>。</li>
+<li><b>恒力能做曲线运动</b>(平抛),<b>不能做匀速圆周</b>(合力方向须时刻改变)。</li></ul>
+<h4>平抛必背</h4>
+<p>速度偏角 tanθ=v<sub>y</sub>/v<sub>x</sub>=gt/v<sub>0</sub>;位移偏角 tanα=y/x=gt/(2v<sub>0</sub>)。<b>tanθ=2tanα</b>。</p>
+<h4>竖直面最高点临界</h4>
+<table><tr><td>绳 / 轨道内侧</td><td>只能拉或压,最小速度 √(gR)</td></tr>
+<tr><td>杆 / 管道 / 双轨</td><td>可支撑,最小速度可以为 <b>0</b></td></tr></table>
+<div class="f bad">✗ 所有最高点都要 v≥√(gR) —— 看到"轻杆""细管"立刻去掉这个限制。</div>
+<h4>水平转弯</h4>
+<p><b>恰好</b>不打滑 → 摩擦力取最大值 μmg,最大速度 v=√(μgR),与质量无关。</p>`},
+{id:'g6',s:'功能动量',n:'6. 功能关系与动量:符号和条件',b:`
+<h4>符号关系</h4>
+<ul><li>W<sub>G</sub> = −ΔE<sub>p</sub>:重力做正功,重力势能<b>减少</b>。</li>
+<li>合外力做功 = 动能变化,<b>恒成立</b>,不限力的性质和轨迹。</li>
+<li>除重力弹力外的力做的功 = 机械能变化。</li></ul>
+<h4>摩擦生热</h4>
+<div class="f">Q = f × <b>相对位移</b>,不是某个物体对地的位移。</div>
+<h4>两个守恒的边界</h4>
+<table><tr><td>动量守恒</td><td>合外力为零;<b>某方向</b>合外力为零则该方向守恒;碰撞爆炸内力远大于外力可近似守恒</td></tr>
+<tr><td>机械能守恒</td><td>只有重力或弹力做功</td></tr></table>
+<div class="f bad">✗ 动量守恒就一定机械能守恒 —— 完全非弹性碰撞是反例。</div>
+<div class="f bad">✗ 机械能守恒就一定动量守恒 —— 自由落体是反例。</div>
+<h4>功率</h4>
+<p>P=Fvcosθ。v 取瞬时速度算瞬时功率;只有 F 恒定且同向时,取平均速度才等于平均功率。</p>`}];
+
+const Q=[
+{id:'q1',g:'g1',r:'概念',t:'足球被踢出后飞行,随后入网并使球网变形。则',o:['足球在飞行和触网时惯性不变','足球在飞行和触网时受力不变','触网时足球对网的力大于网对足球的力','研究足球入网时的转动可将其视为质点'],a:0,e:`<div class="opt"><b>A 对</b> 惯性只由质量决定,全程质量不变。速度改变不影响惯性。</div><div class="opt"><b>B 错</b> 飞行时只受重力,触网时多了网的弹力。</div><div class="opt"><b>C 错</b> 牛顿第三定律任何情况成立,两力永远等大反向。</div><div class="opt"><b>D 错</b> 研究转动时转动本身是研究对象,不能视为质点。</div>`},
+{id:'q2',g:'g1',r:'概念',t:'下列关于质点的说法正确的是',o:['体积小的物体一定能看成质点','研究地球公转时可把地球看成质点','研究花样滑冰运动员的旋转时可把她看成质点','质量很大的物体一定不能看成质点'],a:1,e:`<div class="opt"><b>A 错</b> 研究乒乓球旋转时它再小也不行,大小不是判据。</div><div class="opt"><b>B 对</b> 公转时地球直径远小于轨道半径,可忽略。</div><div class="opt"><b>C 错</b> 旋转是研究对象本身。</div><div class="opt"><b>D 错</b> 地球质量极大,公转时照样当质点。</div>`},
+{id:'q3',g:'g1',m:1,r:'概念',t:'(多选)关于牛顿第三定律,下列说法正确的是',o:['作用力与反作用力大小相等、方向相反、在同一直线上','作用力与反作用力是同种性质的力','作用力与反作用力可相互抵消,合力为零','马拉车加速前进时,马拉车的力等于车拉马的力'],a:[0,1,3],e:`<div class="opt"><b>A 对</b> 标准表述。</div><div class="opt"><b>B 对</b> 摩擦力的反作用力一定是摩擦力。</div><div class="opt"><b>C 错</b> 两力作用在<b>两个不同物体</b>上,不能求合力,谈不上抵消。这是它与二力平衡的本质区别。</div><div class="opt"><b>D 对</b> 加速时同样成立。车能加速是因为车受合力不为零,不是马的力更大。</div>`},
+{id:'q4',g:'g1',r:'概念',t:'关于向心力,下列说法正确的是',o:['向心力是做圆周运动时额外产生的力','向心力按作用效果命名,由已有力的合力或分力提供','做圆周运动的物体除向心力还受离心力','向心力一定由弹力提供'],a:1,e:`<div class="opt"><b>A 错</b> 不是新增的力,受力分析不能单独画。</div><div class="opt"><b>B 对</b> 效果力,可由重力、弹力、摩擦力、万有引力充当。</div><div class="opt"><b>C 错</b> 不存在离心力,离心现象是向心力不足。</div><div class="opt"><b>D 错</b> 卫星靠万有引力,转弯汽车靠摩擦力。</div>`},
+{id:'q5',g:'g2',r:'概念',t:'关于曲线运动,下列说法正确的是',o:['物体在恒力作用下不可能做曲线运动','物体在恒力作用下不可能做匀速圆周运动','做平抛运动的物体在相等时间内速度变化量不一定相同','做匀速圆周运动的物体在相等时间内速度变化量一定相同'],a:1,e:`<div class="opt"><b>A 错</b> 平抛就是恒力下的曲线运动。力与初速度不共线轨迹就弯。</div><div class="opt"><b>B 对</b> 匀速圆周合力须始终指向圆心,方向时刻变,恒力做不到。</div><div class="opt"><b>C 错</b> 平抛 Δv=gΔt,大小相等方向都向下,<b>一定相同</b>。</div><div class="opt"><b>D 错</b> 匀速圆周 Δv 大小相等但方向在变,<b>不一定相同</b>。</div><div class="f">C、D 恰好互换。"相同"对矢量意味着大小和方向都相同,这是全题唯一考点。</div>`},
+{id:'q6',g:'g2',r:'概念',t:'物体做匀速圆周运动,则在任意相等时间内',o:['速度相同','速率相等,动能不变','动量相同','合力不变'],a:1,e:`<div class="opt"><b>A 错</b> 速度是矢量,方向时刻改变。</div><div class="opt"><b>B 对</b> 速率恒定,动能是标量只与速率有关。</div><div class="opt"><b>C 错</b> 动量是矢量,方向随速度改变。</div><div class="opt"><b>D 错</b> 合力大小不变但方向时刻改变,"不变"不成立。</div><div class="f">四个选项全靠"相同 / 相等 / 不变"三个词区分。标量才能只看大小。</div>`},
+{id:'q7',g:'g2',m:1,r:'概念',t:'(多选)关于动量变化量与冲量,下列说法正确的是',o:['Δp = p末 − p初,是矢量差','合外力冲量等于动量变化量,方向相同','物体动能不变,动量一定不变','做平抛运动的物体,相等时间内重力的冲量相同'],a:[0,1,3],e:`<div class="opt"><b>A 对</b> 必须按矢量运算,不是大小直接相减。</div><div class="opt"><b>B 对</b> 动量定理,方向一致。</div><div class="opt"><b>C 错</b> 匀速圆周动能不变而动量时刻在变;等速率反弹也是反例。</div><div class="opt"><b>D 对</b> 重力是恒力,I=mgΔt,大小方向都相同。</div>`},
+{id:'q8',g:'g2',m:1,r:'概念',t:'(多选)下列情形中可能出现的是',o:['速度大小不变而速度方向改变','加速度不为零而速度大小不变','加速度为零而速度不断改变','速度为零而加速度不为零'],a:[0,1,3],e:`<div class="opt"><b>A 可能</b> 匀速圆周运动。</div><div class="opt"><b>B 可能</b> 同样是匀速圆周,加速度指向圆心。</div><div class="opt"><b>C 不可能</b> 加速度为零意味着速度不变,与"不断改变"矛盾。</div><div class="opt"><b>D 可能</b> 竖直上抛最高点,v=0 而 a=g。</div><div class="f">加速度与速度是两个独立量,只有方向关系决定加速或减速。</div>`},
+{id:'q9',g:'g3',r:'概念',t:'在位移—时间(x-t)图像中,一条倾斜的直线表示物体',o:['做匀加速直线运动','做匀速直线运动','沿倾斜方向运动','做曲线运动'],a:1,e:`<div class="opt"><b>A 错</b> 匀加速在 x-t 图中是抛物线。</div><div class="opt"><b>B 对</b> 斜率即速度,直线说明速度恒定。</div><div class="opt"><b>C 错</b> 图线形状不是轨迹,x-t 图只描述直线运动。</div><div class="opt"><b>D 错</b> 同上,图线弯直与轨迹无关。</div>`},
+{id:'q10',g:'g3',r:'条件',t:'甲、乙两车在同一直线上同时同地同向出发。甲由静止开始匀加速,加速度 2 m/s²;乙匀速,速度 6 m/s。则',o:['t=3 s 时两车相遇','t=3 s 时两车速度相等,此时相距最远','t=6 s 时甲、乙速度相等','全程中甲的位移始终小于乙的位移'],a:1,e:`<div class="opt"><b>A 错</b> t=3 s 时甲走 9 m,乙走 18 m,未相遇。</div><div class="opt"><b>B 对</b> 速度相等时刻 t=6/2=3 s,此前乙更快、此后甲更快,所以此时间距最大(乙领先 9 m)。</div><div class="opt"><b>C 错</b> t=6 s 时甲已达 12 m/s,是乙的两倍。</div><div class="opt"><b>D 错</b> t=6 s 时两者位移同为 36 m,此后甲超过乙。</div><div class="f">v-t 图交点只表示速度相等,相遇必须看面积(位移)相等。这是本组最高频混淆。</div>`},
+{id:'q11',g:'g3',r:'概念',t:'v-t 图像中,图线与时间轴所围的面积表示',o:['加速度','速度的变化量','位移,时间轴下方的面积取负值','路程,各段面积直接相加'],a:2,e:`<div class="opt"><b>A 错</b> 加速度是斜率。</div><div class="opt"><b>B 错</b> 速度变化量读纵坐标之差。</div><div class="opt"><b>C 对</b> 面积即位移,轴下方表示反向,记负。</div><div class="opt"><b>D 错</b> 求路程要取<b>绝对值</b>后相加。</div>`},
+{id:'q12',g:'g4',r:'条件',t:'工人用绕过定滑轮的绳索将重物(视为质点)缓慢下放,重物沿固定斜面缓慢向下移动。不计绳重和一切摩擦,该过程中',o:['绳索的拉力先减小后增大','绳索的拉力一直增大','重物对斜面的压力一直减小','地面对斜面的支持力一直增大'],a:2,e:`<div class="opt"><b>A、B 错</b> 重物受重力、垂直斜面的支持力、绳张力。"缓慢"说明每时刻平衡。重物下移时绳与斜面夹角增大,动态三角形显示张力<b>单调减小</b>,既不会先减后增,也不会增大。</div><div class="opt"><b>C 对</b> 支持力同样单调减小,由牛三,重物对斜面的压力一直减小。</div><div class="opt"><b>D 错</b> 对"斜面+重物"整体,绳张力的竖直分量变化使地面支持力<b>减小</b>。</div><div class="f">两个入口:绳绕过光滑定滑轮两段张力相等;"缓慢"等于每时刻静力平衡。</div>`},
+{id:'q13',g:'g4',r:'条件',t:'用水平力 F 将物块压在竖直墙面上保持静止,逐渐增大 F,则墙对物块的摩擦力',o:['逐渐增大','逐渐减小','保持不变,等于物块重力','方向向下'],a:2,e:`<div class="opt"><b>A、B 错</b> 竖直方向只有重力和静摩擦力,平衡要求 f 恒等于 mg,与 F 无关。</div><div class="opt"><b>C 对</b> 增大 F 只提高最大静摩擦的上限,不改变实际值。</div><div class="opt"><b>D 错</b> 必须向上才能平衡重力。</div><div class="f">静摩擦力由平衡条件决定,不由 μF<sub>N</sub> 算,后者只是上限。</div>`},
+{id:'q14',g:'g4',m:1,r:'条件',t:'(多选)关于整体法与隔离法,下列说法正确的是',o:['求系统受到的外力时优先用整体法','求系统内部物体间的相互作用力必须用隔离法','用整体法时系统内力要画入受力图','整体法要求系统内各物体加速度相同或已知'],a:[0,1,3],e:`<div class="opt"><b>A 对</b> 内力自动抵消,方程最少。</div><div class="opt"><b>B 对</b> 内力在整体法中不出现。</div><div class="opt"><b>C 错</b> 内力绝不能画入整体受力图,这是整体法最常见的错误。</div><div class="opt"><b>D 对</b> 加速度不同时需分别列式。</div>`},
+{id:'q15',g:'g5',r:'公式',t:'做平抛运动的物体,速度方向与水平方向夹角 θ、位移方向与水平方向夹角 α 满足',o:['tanθ = tanα','tanθ = 2tanα','2tanθ = tanα','θ = α'],a:1,e:`<div class="opt"><b>B 对</b> tanθ=gt/v<sub>0</sub>,tanα=(½gt²)/(v<sub>0</sub>t)=gt/(2v<sub>0</sub>),故 tanθ=2tanα。</div><div class="opt"><b>A、D 错</b> 速度方向总比位移方向更陡。</div><div class="opt"><b>C 错</b> 关系写反,最常见的记忆错误。</div><div class="f">记法:速度偏角更大,tan 值大的那个不带系数。</div>`},
+{id:'q16',g:'g5',r:'条件',t:'小球在竖直面内做圆周运动,通过最高点时',o:['若用轻绳连接,最小速度为 0','若用轻杆连接,最小速度为 √(gR)','若用轻绳连接,最小速度为 √(gR)','无论绳或杆,最小速度都是 √(gR)'],a:2,e:`<div class="opt"><b>A 错</b> 绳只能拉不能支撑,v=0 时球会脱离轨道。</div><div class="opt"><b>B 错</b> 杆能提供向上支撑,最小速度可以为 0。</div><div class="opt"><b>C 对</b> 临界条件是重力恰好提供向心力:mg=mv²/R,v=√(gR)。</div><div class="opt"><b>D 错</b> 混淆两种模型。</div><div class="f">"轻杆""细管""双轨道"去掉 √(gR) 限制;"轻绳""轨道内侧"加上。</div>`},
+{id:'q17',g:'g5',m:1,r:'条件',t:'(多选)汽车在水平公路上转弯,靠摩擦力提供向心力。下列说法正确的是',o:['汽车恰好不打滑时,摩擦力达到最大静摩擦力','最大转弯速度 v=√(μgR),与汽车质量无关','转弯半径越大,允许的最大速度越大','速度超过最大值时,汽车受离心力作用而滑出'],a:[0,1,2],e:`<div class="opt"><b>A 对</b> "恰好"即临界,摩擦力取最大值。</div><div class="opt"><b>B 对</b> μmg=mv²/R,质量约掉。</div><div class="opt"><b>C 对</b> v 与 √R 成正比。</div><div class="opt"><b>D 错</b> 不存在离心力。滑出是所需向心力超过摩擦力上限,属离心现象。</div>`},
+{id:'q18',g:'g5',r:'概念',t:'做曲线运动的物体,其所受合力',o:['一定指向轨迹的凹侧','一定与速度方向垂直','大小一定改变','一定是变力'],a:0,e:`<div class="opt"><b>A 对</b> 合力指向轨迹凹侧,这是判断弯曲方向的依据。</div><div class="opt"><b>B 错</b> 只有匀速圆周等特殊情况垂直,平抛中不垂直。</div><div class="opt"><b>C、D 错</b> 平抛中合力就是大小方向都不变的重力。</div>`},
+{id:'q19',g:'g6',r:'概念',t:'物体从高处自由下落,下列说法正确的是',o:['重力做正功,重力势能增加','重力做正功,重力势能减少','重力做负功,重力势能减少','重力做的功等于重力势能的增加量'],a:1,e:`<div class="opt"><b>B 对</b> W<sub>G</sub>=−ΔE<sub>p</sub>,做正功则势能减少。</div><div class="opt"><b>A、C 错</b> 符号关系记反。下落时重力与位移同向,做正功。</div><div class="opt"><b>D 错</b> 等于势能的<b>减少</b>量,少一个负号整题就错。</div>`},
+{id:'q20',g:'g6',r:'公式',t:'物块在木板上滑动,滑动摩擦力大小为 f,物块对地位移 s₁,木板对地位移 s₂(同向,s₁>s₂),则摩擦产生的热量为',o:['f·s₁','f·s₂','f·(s₁ − s₂)','f·(s₁ + s₂)'],a:2,e:`<div class="opt"><b>C 对</b> Q = f × <b>相对位移</b>,同向取之差。</div><div class="opt"><b>A、B 错</b> 用单个物体对地位移算的是摩擦力对该物体做的功,不是生热。</div><div class="opt"><b>D 错</b> 反向运动时才用和。</div>`},
+{id:'q21',g:'g6',m:1,r:'条件',t:'(多选)下列过程中,系统动量守恒的是',o:['光滑水平面上两小球发生碰撞','粗糙水平面上两小球碰撞的瞬间(内力远大于摩擦力)','人在静止小车上行走,车与地面光滑','竖直上抛的小球在空中运动'],a:[0,1,2],e:`<div class="opt"><b>A 对</b> 合外力为零,严格守恒。</div><div class="opt"><b>B 对</b> 碰撞时间极短,内力远大于外力,近似守恒。</div><div class="opt"><b>C 对</b> 水平方向合外力为零,该方向守恒。</div><div class="opt"><b>D 错</b> 受重力,动量不守恒(机械能守恒)。</div><div class="f">"某方向合外力为零则该方向守恒"最常用也最容易漏。</div>`},
+{id:'q22',g:'g6',m:1,r:'概念',t:'(多选)关于动量守恒与机械能守恒,下列说法正确的是',o:['动量守恒的系统,机械能不一定守恒','机械能守恒的系统,动量不一定守恒','完全非弹性碰撞中动量守恒,机械能不守恒','弹性碰撞中两者都守恒'],a:[0,1,2,3],e:`<div class="opt"><b>A 对</b> 完全非弹性碰撞是反例。</div><div class="opt"><b>B 对</b> 自由落体机械能守恒但受重力,动量不守恒。</div><div class="opt"><b>C 对</b> 碰后速度相同,动能损失最大。</div><div class="opt"><b>D 对</b> 弹性碰撞定义即动能无损失。</div><div class="f">四个都对要敢全选。两个守恒的条件完全独立,互不蕴含。</div>`},
+{id:'q23',g:'g6',r:'公式',t:'关于功率公式 P = Fvcosθ,下列说法正确的是',o:['v 取瞬时速度时,P 为瞬时功率','v 取平均速度时,P 一定是平均功率','功率越大说明做的功越多','θ=90° 时功率最大'],a:0,e:`<div class="opt"><b>A 对</b> 瞬时功率的定义式。</div><div class="opt"><b>B 错</b> 只有 F 恒定且与 v 同向才成立,否则平均功率用 W/t。</div><div class="opt"><b>C 错</b> 功率是做功快慢,还要看时间。</div><div class="opt"><b>D 错</b> cos90°=0,功率为零。</div>`},
+{id:'q24',g:'g6',r:'条件',t:'关于动能定理 W<sub>合</sub> = ΔE<sub>k</sub>,下列说法正确的是',o:['只适用于恒力做功','只适用于直线运动','对变力和曲线运动同样适用','要求物体只受重力'],a:2,e:`<div class="opt"><b>C 对</b> 不限力的性质和轨迹,这是它比牛顿定律好用的地方。</div><div class="opt"><b>A、B 错</b> 适用范围被人为缩小,多过程变力问题正是靠它求解。</div><div class="opt"><b>D 错</b> 那是机械能守恒的条件。</div><div class="f">W<sub>合</sub> 是所有力做功的代数和,含摩擦、弹力、拉力等全部。</div>`}];
+
+const KEY='wlfx_v3',DAY=864e5,RS=['概念','公式','条件','计算'];
+const RL={概念:'概念记错',公式:'公式用错',条件:'条件漏看',计算:'计算失误'};
+let DB=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{q:{}}}catch(e){return{q:{}}}})();
+if(!DB.q)DB.q={};
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){alert('存储失败')}};
+const rc=id=>DB.q[id]||(DB.q[id]={att:0,cor:0,st:0,w:false,rs:'',due:0});
+const L=i=>'ABCD'[i];
+const rt=q=>q.m?q.a.slice().sort((x,y)=>x-y):[q.a];
+const wl=()=>Q.filter(q=>DB.q[q.id]&&DB.q[q.id].w);
+const dl=()=>wl().filter(q=>DB.q[q.id].due<=Date.now());
+const gn=id=>G.find(x=>x.id===id).s;
+
+let tab='home',mode='all',mg='',qu=[],qi=0,ansd=false,sel=[],wf='all',more='ref';
+const app=document.getElementById('app');
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ tab=b.dataset.t;
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ scrollTo(0,0);R()});
+function R(){({home:vHome,learn:vLearn,quiz:vQuiz,wrong:vWrong,more:vMore}[tab])()}
+
+function vHome(){
+ const att=Object.keys(DB.q).length,w=wl().length,d=dl().length;
+ let tot=0,cor=0;Object.values(DB.q).forEach(r=>{tot+=r.att;cor+=r.cor});
+ app.innerHTML=`<div class="card"><div class="ct">今日状态<span class="pct">练过 ${att} / ${Q.length} 题</span></div>
+  <div class="bar"><i style="width:${att/Q.length*100}%"></i></div>
+  <p class="n" style="margin-top:10px">正确率 ${tot?Math.round(cor/tot*100)+'%':'—'} · 错题 ${w} 道 · 今日到期 ${d} 道</p>
+  ${d?`<button class="btn go" onclick="go('due')">开始今日复习(${d} 道)</button>`:`<button class="btn go" onclick="go('all')">开始刷题</button>`}</div>
+ <div class="card"><div class="ct">六组考点</div><div style="margin-top:8px">
+  ${G.map(g=>{const s=st(g.id);return `<button class="mini ${s.a?'on':''}" onclick="gstart('${g.id}')">${g.s} ${s.a?Math.round(s.c/s.a*100)+'%':''}</button>`}).join('')}
+  </div></div>
+ <div class="entry soon"><div class="en">专题二 · 近代物理与热学记忆精度</div><div class="ed">核反应方程 / 比结合能 / 光电效应 / 分子力与内能 · 编写中</div></div>
+ <div class="entry soon"><div class="en">专题三 · 万有引力与简谐运动</div><div class="ed">黄金代换 / 同步卫星 / 位置函数对称性 · 待开始</div></div>
+ <div class="card"><div class="ct">怎么用</div><p class="n" style="margin-top:6px">题目是四选项跨章节辨析。先点选项,再点确定提交才判分。解析逐项点评,重点看错项错在哪个字。多选选对但不全算半对,仍进错题本。</p></div>`;
+}
+window.go=m=>{mode=m;bd();tab='quiz';nv('quiz');R()};
+window.gstart=g=>{mode='g';mg=g;bd();tab='quiz';nv('quiz');R()};
+const nv=t=>document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.t===t));
+function st(gid){const qs=Q.filter(q=>q.g===gid);let a=0,c=0;qs.forEach(q=>{const r=DB.q[q.id];if(r){a+=r.att;c+=r.cor}});return{a,c,n:qs.length}}
+
+function vLearn(){
+ app.innerHTML=G.map(g=>{const s=st(g.id),p=s.a?Math.round(s.c/s.a*100):-1;
+  return `<div class="card"><button class="ct" onclick="tg('${g.id}')"><span>${g.n}</span>
+   <span class="pct">${p<0?'未练':'掌握 '+p+'%'} ›</span></button>
+   <div class="bd" id="b_${g.id}">${g.b}
+   <button class="mini on" style="margin-top:14px" onclick="gstart('${g.id}')">练这组(${s.n} 题)</button></div></div>`}).join('');
+}
+window.tg=id=>document.getElementById('b_'+id).classList.toggle('on');
+
+function bd(){
+ let l=mode==='all'?Q.slice():mode==='g'?Q.filter(q=>q.g===mg):mode==='w'?wl():dl();
+ for(let i=l.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[l[i],l[j]]=[l[j],l[i]]}
+ qu=l;qi=0;ansd=false;sel=[];
+}
+function vQuiz(){
+ if(!qu.length)bd();
+ const bar=`<div class="card">${[['all','全部'],['g','按组'],['w','只刷错题('+wl().length+')'],['due','今日复习('+dl().length+')']].map(([m,n])=>`<button class="mini ${mode===m?'on':''}" onclick="sm('${m}')">${n}</button>`).join('')}
+  ${mode==='g'?`<div style="margin-top:8px">${G.map(g=>`<button class="mini ${mg===g.id?'on':''}" onclick="sg('${g.id}')">${g.s}</button>`).join('')}</div>`:''}</div>`;
+ if(!qu.length){app.innerHTML=bar+`<div class="empty">${mode==='w'?'还没有错题。':mode==='due'?'今天没有到期的错题。':'没有题目。'}</div>`;return}
+ const q=qu[qi],r=rc(q.id);
+ app.innerHTML=bar+`<div class="card">
+  <div class="n">第 ${qi+1} / ${qu.length} 题 <span class="tag">${gn(q.g)}</span>${q.m?'<span class="tag" style="color:#f0c478">多选</span>':''}${r.w?'<span class="tag" style="color:#ff9b9b">错题</span>':''}</div>
+  <div class="bar"><i style="width:${qi/qu.length*100}%"></i></div>
+  <div class="q">${q.t}</div>
+  <div id="op">${q.o.map((o,i)=>`<button class="btn" onclick="pk(${i})">${L(i)}. ${o}</button>`).join('')}</div>
+  <button class="btn mid" id="sb" style="color:#6b7383" onclick="sb()">请先选择答案</button>
+  <div class="exp" id="ex"></div><div id="nx"></div></div>`;
+ ansd=false;sel=[];
+}
+window.sm=m=>{mode=m;if(m==='g'&&!mg)mg=G[0].id;bd();R()};
+window.sg=g=>{mg=g;bd();R()};
+window.pk=i=>{
+ if(ansd)return;const q=qu[qi];
+ if(q.m){sel.includes(i)?sel.splice(sel.indexOf(i),1):sel.push(i)}else sel=[i];
+ document.querySelectorAll('#op .btn').forEach((b,k)=>b.classList.toggle('sel',sel.includes(k)));
+ const s=document.getElementById('sb');
+ if(!sel.length){s.textContent='请先选择答案';s.style.background='';s.style.borderColor='';s.style.color='#6b7383';s.style.fontWeight='';return}
+ s.textContent='确定提交 · 已选 '+sel.slice().sort().map(L).join('');
+ s.style.background='#5b8def';s.style.borderColor='#5b8def';s.style.color='#fff';s.style.fontWeight='600';
+};
+window.sb=()=>{
+ if(ansd||!sel.length)return;ansd=true;
+ const q=qu[qi],r=rc(q.id),rs=rt(q),pk=sel.slice().sort((x,y)=>x-y);
+ const noW=pk.every(i=>rs.includes(i)),full=noW&&pk.length===rs.length;
+ r.att++;
+ document.querySelectorAll('#op .btn').forEach((b,k)=>{
+  if(rs.includes(k))b.classList.add('c');else if(pk.includes(k))b.classList.add('w');else b.classList.add('dim')});
+ document.getElementById('sb').style.display='none';
+ let ex='';
+ if(full){r.cor++;r.st++;
+  if(r.w){if(r.st>=2){r.w=false;r.rs='';ex='<div class="f good">连续答对 2 次,已移出错题本。</div>'}
+   else{r.due=Date.now()+3*DAY;ex='<div class="f">答对 1 次,再对 1 次移出错题本。</div>'}}
+ }else{r.st=0;r.w=true;r.due=Date.now()+DAY;if(!r.rs)r.rs=q.r;
+  ex=`<div style="margin-top:10px"><div class="n">这题错在哪?点一下归类</div>
+   ${RS.map(x=>`<button class="mini ${r.rs===x?'on':''}" onclick="sr('${q.id}','${x}',this)">${RL[x]}</button>`).join('')}</div>`}
+ sv();
+ const e=document.getElementById('ex');e.className='exp on';
+ const hd=full?'<b style="color:#6fe0a0">完全正确</b>':(noW&&q.m?'<b style="color:#f0c478">选对但不全 · 按 3 分计,仍进错题本</b>':'<b style="color:#ff9b9b">错误</b>');
+ e.innerHTML=`${hd} · 正确答案 ${rs.map(L).join('')}<div style="margin-top:8px">${q.e}</div>${ex}`;
+ document.getElementById('nx').innerHTML=`<button class="btn go" onclick="nx()">${qi+1<qu.length?'下一题':'完成本轮'}</button>`;
+};
+window.sr=(id,x,el)=>{rc(id).rs=x;sv();el.parentNode.querySelectorAll('.mini').forEach(b=>b.classList.toggle('on',b===el))};
+window.nx=()=>{if(qi+1<qu.length){qi++;R();scrollTo(0,0)}
+ else app.innerHTML=`<div class="card"><div class="ct">本轮完成</div><p class="n" style="margin-top:10px">共 ${qu.length} 题。错题已进错题本,明天出现在"今日复习"。</p><button class="btn go" onclick="bd();R()">再来一轮</button></div>`};
+
+function vWrong(){
+ const all=wl(),c={};RS.forEach(x=>c[x]=all.filter(q=>DB.q[q.id].rs===x).length);
+ const tt=all.length||1;
+ app.innerHTML=`<div class="card"><div class="ct">错题 ${all.length} 道<span class="pct">今日待复习 ${dl().length}</span></div>
+  ${all.length?`<div style="margin-top:10px">${RS.map(x=>`<div style="margin:7px 0"><div class="n">${RL[x]} · ${c[x]} 道 (${Math.round(c[x]/tt*100)}%)</div><div class="bar"><i style="width:${c[x]/tt*100}%"></i></div></div>`).join('')}
+  <div class="n" style="margin-top:10px">占比最高的那一类就是你丢分的真正原因。</div>
+  <div style="margin-top:8px">${[['all','全部']].concat(RS.map(x=>[x,RL[x]])).map(([v,n])=>`<button class="mini ${wf===v?'on':''}" onclick="sw('${v}')">${n}</button>`).join('')}</div>`:''}</div>`
+ +(()=>{const l=wf==='all'?all:all.filter(q=>DB.q[q.id].rs===wf);
+  return l.length?l.map(q=>{const r=DB.q[q.id],d=Math.ceil((r.due-Date.now())/DAY);
+   return `<div class="card"><div class="n"><span class="tag">${RL[r.rs]||'未分类'}</span><span class="tag">${gn(q.g)}</span>错 ${r.att-r.cor} 次 · ${r.due<=Date.now()?'待复习':d+' 天后'}</div>
+   <div class="q">${q.t}</div>${q.o.map((o,i)=>`<div class="opt">${L(i)}. ${o}</div>`).join('')}
+   <div class="f good">正确答案 ${rt(q).map(L).join('')}</div>
+   <div style="font-size:14.5px;color:#aeb6c2">${q.e}</div>
+   <button class="mini" onclick="rm('${q.id}')">手动移出</button></div>`}).join('')
+  :`<div class="empty">${all.length?'这一类里没有错题。':'还没有错题。答错的题会自动收进来,按四类错因统计。'}</div>`})();
+}
+window.sw=v=>{wf=v;R()};
+window.rm=id=>{rc(id).w=false;sv();R()};
+
+function vMore(){
+ const sw=`<div class="card">${[['ref','速查表'],['data','备份']].map(([v,n])=>`<button class="mini ${more===v?'on':''}" onclick="sM('${v}')">${n}</button>`).join('')}</div>`;
+ app.innerHTML=sw+(more==='ref'?REF:DATA());
+}
+window.sM=v=>{more=v;R()};
+const REF=`<div class="card"><div class="ct">一、用词精度</div><table>
+<tr><td>相同</td><td>矢量:大小和方向都一样。位移、Δv、动量都按这条判。</td></tr>
+<tr><td>相等</td><td>只比大小。弹力相等、速率相等、动能相等。</td></tr>
+<tr><td>一定 / 可能</td><td>"一定"一个反例就错;"可能"一个例子就对。</td></tr>
+<tr><td>不变</td><td>矢量不变 = 大小方向都不变。匀速圆周速度在变、速率不变。</td></tr>
+<tr><td>缓慢</td><td>每时刻都是平衡态,按静力学处理。</td></tr>
+<tr><td>恰好</td><td>临界条件,某量正好为 0 或达极值。</td></tr>
+<tr><td>第 n 秒内</td><td>时长 1 s 的那一段,不是前 n 秒。</td></tr></table></div>
+<div class="card"><div class="ct">二、常驻错项</div><table>
+<tr><td>惯性</td><td>只由质量决定,与速度、受力、状态无关。</td></tr>
+<tr><td>牛顿第三定律</td><td>任何情况成立,作用在两物体上,不能求合力。</td></tr>
+<tr><td>质点</td><td>取决于所研究的问题。研究转动不能当质点。</td></tr>
+<tr><td>向心力</td><td>效果力,不额外存在。没有离心力。</td></tr>
+<tr><td>恒力</td><td>能做平抛,不能做匀速圆周。</td></tr>
+<tr><td>图线形状</td><td>x-t、v-t 图线不是轨迹,只描述直线运动。</td></tr></table></div>
+<div class="card"><div class="ct">三、函数依赖关系</div><table>
+<tr><td>简谐运动</td><td>位移、加速度、回复力由<b>位置</b>决定且共线;速度大小由位置决定,方向不由位置决定。</td></tr>
+<tr><td>光电效应</td><td>饱和电流 ← 光子数(光强);遏止电压与最大初动能 ← 频率。两条线不能串。</td></tr>
+<tr><td>核反应</td><td>质量数与电荷数守恒是唯一硬标准。铀 235 裂变方程左边必须写入射中子。</td></tr>
+<tr><td>比结合能</td><td>中等质量核最大(铁附近),中间高两头低。反应朝比结合能变大方向放能。</td></tr>
+<tr><td>每核子释能</td><td>聚变 &gt; 裂变,别记反。</td></tr>
+<tr><td>温度</td><td>分子平均<b>动能</b>的标志,不是平均速率,与分子数无关。</td></tr></table></div>
+<div class="card"><div class="ct">四、条件边界</div><table>
+<tr><td>v̄=(v<sub>0</sub>+v)/2</td><td>只在匀变速直线运动成立。</td></tr>
+<tr><td>Δx=aT²</td><td>只在匀变速、连续相等时间间隔成立。</td></tr>
+<tr><td>动量守恒</td><td>合外力为零;某方向为零则该方向守恒;内力远大于外力近似守恒。</td></tr>
+<tr><td>机械能守恒</td><td>只有重力或弹力做功。与动量守恒互不蕴含。</td></tr>
+<tr><td>摩擦生热</td><td>Q = f × <b>相对位移</b>。</td></tr>
+<tr><td>绳 / 杆临界</td><td>最高点:绳或内轨 √(gR);杆或管道可以为 0。</td></tr></table></div>`;
+function DATA(){
+ const n=Object.keys(DB.q).length,w=wl().length;
+ return `<div class="card warn">两件事:<br>1. 用 Safari 分享菜单"添加到主屏幕",之后只从图标进。Safari 和图标里的数据是两套。<br>2. Safari 约 7 天不访问会清理数据,每周导出一次存到"文件"App。</div>
+ <div class="card"><div class="ct">当前数据</div><p class="n">练过 ${n} 题 · 错题 ${w} 道</p>
+ <button class="btn mid" onclick="ex1()">导出备份</button><button class="btn mid" onclick="cp1()">复制到剪贴板</button></div>
+ <div class="card"><div class="ct">导入</div><p class="n">粘贴备份内容,会覆盖当前数据。</p>
+ <textarea id="im"></textarea><button class="btn mid" onclick="im1()">导入并覆盖</button></div>
+ <div class="card"><div class="ct">清空</div><button class="btn mid" style="color:#ff9b9b" onclick="cl1()">清空全部记录</button></div>`;
+}
+window.ex1=()=>{const b=new Blob([JSON.stringify(DB)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(b);
+ a.download='物理备份_'+new Date().toISOString().slice(0,10)+'.json';a.click()};
+window.cp1=()=>{const t=JSON.stringify(DB);
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>alert('已复制'))
+ .catch(()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();alert('已复制')})};
+window.im1=()=>{const v=document.getElementById('im').value.trim();if(!v)return;
+ try{const o=JSON.parse(v);if(!o.q)throw 0;DB=o;sv();alert('导入成功');R()}catch(e){alert('格式不对')}};
+window.cl1=()=>{if(confirm('确定清空?不可恢复,建议先导出。')){DB={q:{}};sv();R()}};
+
+R();
+</script>
+</body>
+</html>
